@@ -1,0 +1,14 @@
+node_modules/
+client/node_modules/
+server/node_modules/
+client/.next/
+client/out/
+server/data.db
+server/data.db-shm
+server/data.db-wal
+.env
+.env.local
+client/.env.local
+server/.env
+*.log
+.DS_Store
