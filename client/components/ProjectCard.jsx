@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const CATEGORY_STYLES = {
   'AI/ML':      'bg-purple-900/40 text-purple-300 border-purple-700/40',
   'Fintech':    'bg-emerald-900/40 text-emerald-300 border-emerald-700/40',
@@ -12,6 +14,7 @@ export default function ProjectCard({ project }) {
 
   return (
     <div className="bg-brand-surface border border-brand-border rounded-xl p-6 flex flex-col gap-4 card-hover">
+      {/* Category badge + external links */}
       <div className="flex items-center justify-between">
         <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${categoryClass}`}>
           {project.category}
@@ -46,11 +49,15 @@ export default function ProjectCard({ project }) {
         </div>
       </div>
 
+      {/* Title & description */}
       <div>
-        <h3 className="text-white font-semibold text-lg mb-2">{project.title}</h3>
+        <Link href={`/projects/${project.id}`} className="hover:text-emerald-400 transition-colors">
+          <h3 className="text-white font-semibold text-lg mb-2">{project.title}</h3>
+        </Link>
         <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">{project.description}</p>
       </div>
 
+      {/* Tech stack */}
       {project.tech_stack?.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {project.tech_stack.slice(0, 4).map(tech => (
@@ -69,14 +76,23 @@ export default function ProjectCard({ project }) {
         </div>
       )}
 
-      {project.author_name && (
-        <div className="mt-auto pt-3 border-t border-brand-border flex items-center gap-2 text-sm text-gray-500">
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-          <span>{project.author_name}</span>
-        </div>
-      )}
+      {/* Author + view details */}
+      <div className="mt-auto pt-3 border-t border-brand-border flex items-center justify-between">
+        {project.author_name ? (
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span>{project.author_name}</span>
+          </div>
+        ) : <div />}
+        <Link
+          href={`/projects/${project.id}`}
+          className="text-xs text-emerald-500 hover:text-emerald-400 font-medium transition-colors"
+        >
+          View details →
+        </Link>
+      </div>
     </div>
   );
 }

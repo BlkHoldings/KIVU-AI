@@ -7,7 +7,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 async function fetchMembers() {
   try {
-    const res = await fetch(`${API_URL}/api/members`, { next: { revalidate: 60 } });
+    const res = await fetch(`${API_URL}/api/members`);
     return res.ok ? res.json() : MEMBERS_DATA;
   } catch {
     return MEMBERS_DATA;
@@ -16,7 +16,7 @@ async function fetchMembers() {
 
 async function fetchProjects() {
   try {
-    const res = await fetch(`${API_URL}/api/projects`, { next: { revalidate: 60 } });
+    const res = await fetch(`${API_URL}/api/projects`);
     return res.ok ? res.json() : PROJECTS_DATA;
   } catch {
     return PROJECTS_DATA;
@@ -50,6 +50,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      {/* Hero */}
       <section className="relative overflow-hidden bg-brand-dark border-b border-brand-border">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(16,185,129,0.12),_transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(245,158,11,0.08),_transparent_60%)]" />
@@ -64,7 +65,7 @@ export default async function HomePage() {
           <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
             The premier community for AI engineers, founders, and innovators
             across Africa. Discover talent, showcase projects, and shape the
-            continent's tech future.
+            continent’s tech future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link
@@ -80,6 +81,7 @@ export default async function HomePage() {
               Browse Projects
             </Link>
           </div>
+          {/* Stats */}
           <div className="flex flex-col sm:flex-row gap-8 justify-center">
             {[
               { value: `${members.length}+`, label: 'Builders' },
@@ -95,11 +97,12 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Features */}
       <section className="max-w-6xl mx-auto px-6 py-24">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">What We Offer</h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Everything you need to grow as a builder in Africa's AI ecosystem.
+            Everything you need to grow as a builder in Africa’s AI ecosystem.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -116,6 +119,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Featured Members */}
       {featuredMembers.length > 0 && (
         <section className="bg-brand-surface border-y border-brand-border">
           <div className="max-w-6xl mx-auto px-6 py-24">
@@ -145,6 +149,7 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Featured Projects */}
       {featuredProjects.length > 0 && (
         <section className="max-w-6xl mx-auto px-6 py-24">
           <div className="flex items-center justify-between mb-12">
@@ -172,6 +177,7 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* CTA */}
       <section className="bg-gradient-to-br from-emerald-900/40 to-amber-900/20 border-t border-brand-border">
         <div className="max-w-4xl mx-auto px-6 py-24 text-center">
           <h2 className="text-4xl font-bold mb-4">
@@ -179,7 +185,7 @@ export default async function HomePage() {
           </h2>
           <p className="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
             Join thousands of builders, founders, and innovators who are shaping
-            Africa's AI and startup ecosystem.
+            Africa’s AI and startup ecosystem.
           </p>
           <Link
             href="/members"

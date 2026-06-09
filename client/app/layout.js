@@ -3,7 +3,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'AI Builders Africa — Build. Connect. Scale.',
+  title: {
+    default: 'AI Builders Africa — Build. Connect. Scale.',
+    template: '%s | AI Builders Africa',
+  },
   description: 'The premier community for AI engineers, founders, and innovators across Africa.',
 };
 

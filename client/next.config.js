@@ -7,6 +7,9 @@ const nextConfig = {
     basePath: '/KIVU-AI',
     trailingSlash: true,
   }),
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;
